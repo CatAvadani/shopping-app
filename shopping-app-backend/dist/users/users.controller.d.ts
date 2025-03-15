@@ -3,5 +3,8 @@ import { UsersService } from './users.service';
 export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
-    createUser(request: CreateUserRequest): void;
+    createUser(request: CreateUserRequest): Promise<{
+        email: string;
+        id: number;
+    }>;
 }
