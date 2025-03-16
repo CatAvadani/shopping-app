@@ -1,3 +1,4 @@
+import { TokenPayload } from 'src/auth/token-payload.interface';
 import { CreateUserRequest } from './dto/create-user.request';
 import { UsersService } from './users.service';
 export declare class UsersController {
@@ -7,4 +8,5 @@ export declare class UsersController {
         email: string;
         id: number;
     }>;
+    getMe(user: TokenPayload): TokenPayload;
 }
