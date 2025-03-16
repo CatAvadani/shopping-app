@@ -1,13 +1,14 @@
 "use server";
 
-import { API_URL } from "@/app/constants/api";
+import { FormError } from "@/app/common/form-error.interface";
+import { post } from "@/app/util/fetch";
 import { redirect } from "next/navigation";
 
 function formatServerErrorMessage(message: string) {
   return message.charAt(0).toLocaleUpperCase() + message.slice(1);
 }
 
-function getErrorMessage(response: any) {
+export async function getErrorMessage(response: any) {
   if (response.message) {
     if (Array.isArray(response.message)) {
       return formatServerErrorMessage(response.message[0]);
@@ -17,14 +18,13 @@ function getErrorMessage(response: any) {
   return "Unknown error occurred.";
 }
 
-export default async function createUser(_prevState: any, formData: FormData) {
-  const res = await fetch(`${API_URL}/users`, {
-    method: "POST",
-    body: formData,
-  });
-  const parsedRes = await res.json();
-  if (!res.ok) {
-    return { error: getErrorMessage(parsedRes) };
+export default async function createUser(
+  _prevState: FormError,
+  formData: FormData
+) {
+  const { error } = await post("users", formData);
+  if (error) {
+    return { error };
   }
   redirect("/");
 }
