@@ -38,6 +38,11 @@ let UsersService = class UsersService {
             throw error;
         }
     }
+    async getUser(filter) {
+        return this.prismaService.user.findUniqueOrThrow({
+            where: filter,
+        });
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([

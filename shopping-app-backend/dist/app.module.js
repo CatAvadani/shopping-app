@@ -11,6 +11,7 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const nestjs_pino_1 = require("nestjs-pino");
 const users_module_1 = require("./users/users.module");
+const auth_module_1 = require("./auth/auth.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -39,6 +40,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             config_1.ConfigModule.forRoot(),
             users_module_1.UsersModule,
+            auth_module_1.AuthModule,
         ],
         controllers: [],
         providers: [],
